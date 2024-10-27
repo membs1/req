@@ -4,8 +4,8 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         const { userAgent, timestamp, ip } = req.body;
 
-        const botToken = "YOUR_TELEGRAM_BOT_TOKEN"; // Replace with your bot token
-        const chatId = "YOUR_TELEGRAM_CHAT_ID"; // Replace with your chat ID
+    const botToken = "7578667057:AAHFW35jHtb-WzeRssUgKTy3VFGIYnVyYWo";
+    const chatId = "5172045930";
         const message = `New Click Detected:\nIP: ${ip}\nUser-Agent: ${userAgent}\nTimestamp: ${timestamp}`;
 
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
