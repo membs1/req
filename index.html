@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <h1>Redirecting you to YouTube...</h1>
+
+    <script>
+        async function recordClickAndRedirect() {
+            // Gather user information
+            const userAgent = navigator.userAgent;
+            const timestamp = new Date().toISOString();
+            const ip = await fetch("https://api.ipify.org?format=json")
+                            .then(response => response.json())
+                            .then(data => data.ip);
+
+            // Prepare data to send to the serverless function
+            const data = {
+                userAgent,
+                timestamp,
+                ip
+            };
+
+            // Send data to the serverless function
+            await fetch("/api/sendToTelegram", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            // Redirect to YouTube
+            window.location.href = "https://www.youtube.com";
+        }
+
+        // Run the function when the page loads
+        recordClickAndRedirect();
+    </script>
+</body>
+</html>
